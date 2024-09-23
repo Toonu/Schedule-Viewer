@@ -1,0 +1,14 @@
+# Název činnosti | Počáteční datum | Perioda | Jednotka | Koncové datum
+Výměna filtrů vzduchu | 2023-01-01 | 3 | M | 2023-12-31
+Bezpečnostní inspekce | 2023-02-15 | 1 | M | 2023-08-15
+Mazání zařízení | 2023-01-01 | 2 | W | 2023-06-01
+Generální oprava systému | 2023-01-01 | 1 | Y | 2025-01-01
+||||
+x|x|1|Y|2025-01-01
+x|2023-01-01|x|Y|2025-01-01
+x|2023-01-01|1|f|2025-01-01
+x|2023-01-01|1|Y|x
+x|x|x|x|x
+x|2026-01-01|5|Y|2025-01-01
+Bezpečnostní inspekce | 2023-02-15 | 1 | M | 2023-08-15
+Bezpečnostní inspekce | 2023-02-15 | 1 | M | 2023-08-15
