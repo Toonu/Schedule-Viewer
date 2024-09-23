@@ -2,11 +2,12 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class ScheduleItem implements Comparable<ScheduleItem> {
-    private int id;
+    private final int id;
     private String title;
     private LocalDate date;
     
-    public ScheduleItem(String title, LocalDate date) {
+    public ScheduleItem(int id, String title, LocalDate date) {
+        this.id = id;
         this.title = title;
         this.date = date;
     }
@@ -23,14 +24,25 @@ public class ScheduleItem implements Comparable<ScheduleItem> {
         return id;
     }
     
+    //Setters in case some person would want to shift or rebook schedule event.
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+    
     @Override
     public String toString() {
-        return title + " | " + Utils.LPad(date.toString(), 5);
+        return title + " | " + Utils.lPad(date.toString(), 5);
     }
     
     @Override
     public int compareTo(ScheduleItem other) {
-        return this.date.compareTo(other.date);
+        int dateComparison = this.date.compareTo(other.date);
+        if (dateComparison != 0) { return dateComparison; }
+        return this.title.compareTo(other.title);
     }
     
     @Override

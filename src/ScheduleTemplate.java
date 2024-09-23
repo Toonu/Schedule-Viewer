@@ -1,17 +1,20 @@
-import jdk.jshell.spi.ExecutionControl;
-
 import java.security.InvalidParameterException;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
+/**
+ * Template for Schedule calendar events.
+ */
 public class ScheduleTemplate {
-    private String title;
-    private LocalDate date_start;
-    private LocalDate date_end;
-    private int repetitiveness;
-    private RepetitivenessType repetitivenessType;
+    private final String title;
+    private final LocalDate date_start;
+    private final LocalDate date_end;
+    private final int repetitiveness;
+    private final RepetitivenessType repetitivenessType;
     
+    /**
+     * Constructor.
+     */
     public ScheduleTemplate(String title, LocalDate date_start, LocalDate date_end, int repetitiveness, RepetitivenessType repetitivenessType) throws InvalidParameterException {
         this.title = title;
         this.date_start = date_start;
@@ -23,13 +26,36 @@ public class ScheduleTemplate {
         this.repetitivenessType = repetitivenessType;
     }
     
-    public void ExportSchedules(Calendar calendar) {
-        //ToDo logic
-        
-        ScheduleItem item = new ScheduleItem(title, date_start);
-        
-        calendar.AddTemplate(item);
+    /**
+     * Creates ScheduleItem events for a calendar.
+     * @param calendar Calendar.
+     */
+    public void exportSchedules(Calendar calendar) {
+        switch (repetitivenessType) {
+            case DAY -> {
+                for (LocalDate tempDate = date_start; tempDate.isBefore(date_end.plusDays(1)); tempDate = tempDate.plusDays(repetitiveness)) {
+                    calendar.addTemplate(title, tempDate);
+                }
+            }
+            case WEEK -> {
+                for (LocalDate tempDate = date_start; tempDate.isBefore(date_end.plusDays(1)); tempDate = tempDate.plusWeeks(repetitiveness)) {
+                    calendar.addTemplate(title, tempDate);
+                }
+            }
+            case MONTH -> {
+                for (LocalDate tempDate = date_start; tempDate.isBefore(date_end.plusDays(1)); tempDate = tempDate.plusMonths(repetitiveness)) {
+                    calendar.addTemplate(title, tempDate);
+                }
+            }
+            case YEAR -> {
+                for (LocalDate tempDate = date_start; tempDate.isBefore(date_end.plusDays(1)); tempDate = tempDate.plusYears(repetitiveness)) {
+                    calendar.addTemplate(title, tempDate);
+                }
+            }
+        }
     }
+    
+    //Getters & Logic
     
     public String getTitle() {
         return title;

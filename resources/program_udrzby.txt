@@ -10,5 +10,5 @@ x|2023-01-01|1|f|2025-01-01
 x|2023-01-01|1|Y|x
 x|x|x|x|x
 x|2026-01-01|5|Y|2025-01-01
-Bezpečnostní inspekce | 2023-02-15 | 1 | M | 2023-08-15
-Bezpečnostní inspekce | 2023-02-15 | 1 | M | 2023-08-15
+Cezpečnostní inspekce | 2023-02-15 | 1 | M | 2023-08-15
+Dezpečnostní inspekce | 2023-02-15 | 1 | M | 2023-08-15

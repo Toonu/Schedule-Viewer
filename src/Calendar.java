@@ -1,34 +1,77 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
+/**
+ * Calendar class for storing events.
+ */
 public class Calendar {
     private final List<ScheduleItem> scheduleItems;
+    private int autoIteration = 0;
     public static List<Calendar> calendars = new ArrayList<>();
     
-    public void AddTemplate(ScheduleItem template) {
-        scheduleItems.add(template);
-    }
-    public void RemoveTemplate(ScheduleItem template) {
-        scheduleItems.remove(template);
-    }
-    public void RemoveTemplate(String title, LocalDate date) {
-        for (ScheduleItem template : scheduleItems) {
-            if (template.getTitle().equals(title) && template.getDate().equals(date)) {
-                scheduleItems.remove(template);
-            }
-        }
-    }
-    
+    /**
+     * Constructor.
+     * @param scheduleItems List<ScheduleItem> of events in the calendar.
+     */
     public Calendar(List<ScheduleItem> scheduleItems) {
         this.scheduleItems = scheduleItems;
     }
     
-    public void GenerateCalendar() {
-        //Header
-        System.out.println("Time " + "Title");
+    /**
+     * Method to print the calendar into console.
+     */
+    public void printCalendar() {
+        LocalDate date = null;
+        System.out.println("| Time      " + " | Title                                                                            |"); //Header
         for (ScheduleItem scheduleItem : scheduleItems) {
-            scheduleItem.toString();
+            //Printing each day
+            if (!scheduleItem.getDate().equals(date)) {
+                date = scheduleItem.getDate();
+                System.out.println("_________________________________________________________________________________________________\n| "
+                        + Utils.rPad(Utils.getFormattedDay(date), 20)
+                        + "                                                                          |\n_________________________________________________________________________________________________");
+            }
+            System.out.println("| "
+                    + scheduleItem.getDate().toString() + " | "
+                    + Utils.rPad(scheduleItem.getTitle(), 80) + " |");
         }
+        System.out.println("_________________________________________________________________________________________________"); //Footer
+        
+    }
+    
+    /**
+     * Method for adding new ScheduleItem events to the calendar.
+     * @param title String name of the event
+     * @param eventDate LocalDate of the event
+     */
+    public void addTemplate(String title, LocalDate eventDate) {
+        scheduleItems.add(new ScheduleItem(autoIteration, title, eventDate));
+        autoIteration++;
+        Collections.sort(scheduleItems);
+    }
+    
+    /**
+     * Method for removal of events from calendar.
+     * @param template ScheduleItem event to remove.
+     */
+    public void removeTemplate(ScheduleItem template) {
+        scheduleItems.remove(template);
+    }
+    
+    /**
+     * Method for removal of events from calendar.
+     * @param title String name of the event.
+     * @param date LocalDate of the event.
+     */
+    public void removeTemplate(String title, LocalDate date) {
+        scheduleItems.removeIf(template -> template.getTitle().equals(title) && template.getDate().equals(date));
+    }
+    
+    /**
+     * Method for removal of events from calendar.
+     * @param id int of the event.
+     */
+    public void removeTemplate(int id) {
+        scheduleItems.removeIf(template -> template.getId() == id);
     }
 }
