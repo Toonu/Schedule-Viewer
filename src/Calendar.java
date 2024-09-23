@@ -7,8 +7,7 @@ import java.util.*;
 public class Calendar {
     private final List<ScheduleItem> scheduleItems;
     private int autoIteration = 0;
-    public static List<Calendar> calendars = new ArrayList<>();
-    
+
     /**
      * Constructor.
      * @param scheduleItems List<ScheduleItem> of events in the calendar.
@@ -22,7 +21,7 @@ public class Calendar {
      */
     public void printCalendar() {
         LocalDate date = null;
-        System.out.println("| Time      " + " | Title                                                                            |"); //Header
+        System.out.println("\n\n\n| Generating Calendar...\n\n\n| Time      " + " | Title                                                                            |"); //Header
         for (ScheduleItem scheduleItem : scheduleItems) {
             //Printing each day
             if (!scheduleItem.getDate().equals(date)) {

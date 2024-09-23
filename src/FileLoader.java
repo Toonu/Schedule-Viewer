@@ -24,7 +24,9 @@ public class FileLoader {
             String line;
             while ((line = reader.readLine()) != null) {
                 i++;
-                parseScheduleTemplate(line, calendar);
+                if (!line.isBlank()) { //Empty lines
+                    parseScheduleTemplate(line, calendar);
+                }
             }
         } catch (IOException e) {
             throw new FileNotFoundException("There was problem loading " + fileName + " file. Make sure it is in the root folder and in correct format. \n" + e.getMessage());
@@ -45,10 +47,13 @@ public class FileLoader {
     private static void parseScheduleTemplate(String line, Calendar calendar) throws RuntimeException {
         //Line check
         String[] split = line.split("[/"+delimiter+"]");
-        if (split.length != 5 || split[0].startsWith("#")) {System.out.println("Warning: Line " + Utils.rPad(String.valueOf(i), 4) + " is invalid: " + line); return; }
-        //Assuming # is meant as comment in the file and would not be used for job names.
+        if (split.length != 5) {System.out.println("Warning: Line " + Utils.rPad(String.valueOf(i), 4) + " is invalid: " + line); return; }
+        
         
         String title = split[0];
+        if (title.startsWith("#")) { //Assuming # is meant as comment in the file and would not be used for job names.
+            System.out.println("Warning: Line " + Utils.rPad(String.valueOf(i), 4) + " is commented out: " + line); return;
+        }
         String stringDateStart = split[1].trim();
         String stringDateEnd = split[4].trim();
         String stringIteration = split[2].trim();
@@ -70,13 +75,29 @@ public class FileLoader {
             template.exportSchedules(calendar);
             //ToDo -args for cancelling loading on any error, instead of ignoring errors
         } catch (InvalidParameterException e) {
-            System.out.println("Warning: Line " + Utils.rPad(String.valueOf(i), 4) + " is invalid due to wrongly formatted time. " + e.getMessage());
+            String message = "Warning: Line " + Utils.rPad(String.valueOf(i), 4) + " is invalid due to wrongly formatted time. " + e.getMessage();
+            if (ScheduleViewer.doesAbortOnExc) { //Abort args
+                throw new RuntimeException(message);
+            }
+            System.out.println(message);
         } catch (DateTimeException e) {
-            System.out.println("Warning: Line " + Utils.rPad(String.valueOf(i), 4) + " is invalid due to wrongly formatted time. Proper usage is [yyyy-mm-dd]: " + line);
+            String message = "Warning: Line " + Utils.rPad(String.valueOf(i), 4) + " is invalid due to wrongly formatted time. Proper usage is [yyyy-mm-dd]: " + line;
+            if (ScheduleViewer.doesAbortOnExc) { //Abort args
+                throw new RuntimeException(message);
+            }
+            System.out.println(message);
         } catch (NumberFormatException e) {
-            System.out.println("Warning: Line " + Utils.rPad(String.valueOf(i), 4) + " is invalid due to wrongly inputted number of repetition: " + line);
+            String message = "Warning: Line " + Utils.rPad(String.valueOf(i), 4) + " is invalid due to wrongly inputted number of repetition: " + line;
+            if (ScheduleViewer.doesAbortOnExc) { //Abort args
+                throw new RuntimeException(message);
+            }
+            System.out.println(message);
         } catch (IllegalArgumentException e) {
-            System.out.println("Warning: Line " + Utils.rPad(String.valueOf(i), 4) + " is invalid due to wrong repetition type. Proper usage is either of [D W M Y]: " + line);
+            String message = "Warning: Line " + Utils.rPad(String.valueOf(i), 4) + " is invalid due to wrong repetition type. Proper usage is either of [D W M Y]: " + line;
+            if (ScheduleViewer.doesAbortOnExc) { //Abort args
+                throw new RuntimeException(message);
+            }
+            System.out.println(message);
         }
     }
 }

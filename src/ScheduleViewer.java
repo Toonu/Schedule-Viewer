@@ -33,11 +33,8 @@ public class ScheduleViewer {
             }
         }
         
-        try { //Arg 1 - Check file & content. Error handling.
-            FileLoader.loadFileByRow(file, new Calendar(new ArrayList<>()));
-        } catch (Exception e) {
-            throw e;
-        }
+        //Arg 1 - Check file & content. Error handling.
+        FileLoader.loadFileByRow(file, new Calendar(new ArrayList<>()));
     }
     
     interface ArgumentHandler {
