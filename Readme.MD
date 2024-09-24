@@ -2,21 +2,19 @@
 
 ## Compilation & Running
 
-### Default
+Pre-requisites: Oracle Java SE 23 (Because the specification said SE8+). Might run on older versions, but NOT tested.
+
+### Using provided releases
 1. Download pre-compiled package from [Releases](https://github.com/Toonu/Schedule-Viewer/releases).
+2. Extract anywhere.
+3. Go into the folder and either use provided example file `filename.txt` or insert yours.
+4. Run `java ScheduleViewer filename.txt` with optional arguments.
 ### Manual
 1. Download repository folder.
-2. While inside the ScheduleViewer src folder.
-3. Run `javac ScheduleViewer.java`
-## Running
-- If you've chosen the Production.zip from [Releases](https://github.com/Toonu/Schedule-Viewer/releases).
-1. Unzip & Navigate yourself into the Production folder.
-2. Insert your text file `filename.txt` into the ScheduleViewer folder.
-3. Run `java ScheduleViewer filename.txt` with optional arguments.
-- If you have downloaded or built the production output.
-1. Navigate yourself into out/production/Schedule Viewer folder. (or the location where you compiled the project)
-2. Insert your text file `filename.txt` into the folder.
-3. Run `java ScheduleViewer filename.txt` with optional arguments.
+2. Go inside the ScheduleViewer src folder (where ScheduleViewer.java is).
+3. Run `javac ScheduleViewer.java` to compile.
+4. Go into the folder and either use provided example file `filename.txt` or insert yours.
+5. Run `java ScheduleViewer filename.txt` with optional arguments. 
 
 ### Arguments
 - -d | `-delimiter ;` --chooses delimiter (use "" if the delimiter is console keyword);

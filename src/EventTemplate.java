@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Template for Schedule calendar events.
  */
-public class ScheduleTemplate {
+public class EventTemplate {
     private final String title;
     private final LocalDate date_start;
     private final LocalDate date_end;
@@ -15,19 +15,19 @@ public class ScheduleTemplate {
     /**
      * Constructor.
      */
-    public ScheduleTemplate(String title, LocalDate date_start, LocalDate date_end, int repetitiveness, RepetitivenessType repetitivenessType) throws InvalidParameterException {
+    public EventTemplate(String title, LocalDate date_start, LocalDate date_end, int repetitiveness, RepetitivenessType repetitivenessType) throws InvalidParameterException {
         this.title = title;
         this.date_start = date_start;
         this.date_end = date_end;
         
         if (date_end.isBefore(date_start)) {throw new InvalidParameterException("End date is before the start date!");}
-        
+        if (repetitiveness < 1) {throw new InvalidParameterException("Repetitiveness must be greater than zero!");}
         this.repetitiveness = repetitiveness;
         this.repetitivenessType = repetitivenessType;
     }
     
     /**
-     * Creates ScheduleItem events for a calendar.
+     * Creates CalendarEvent events for a calendar.
      * @param calendar Calendar.
      */
     public void exportSchedules(Calendar calendar) {
@@ -74,7 +74,7 @@ public class ScheduleTemplate {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ScheduleTemplate template = (ScheduleTemplate) o;
+        EventTemplate template = (EventTemplate) o;
         return Objects.equals(title, template.title) && Objects.equals(date_start, template.date_start) && Objects.equals(date_end, template.date_end);
     }
     

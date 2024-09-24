@@ -1,12 +1,12 @@
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class ScheduleItem implements Comparable<ScheduleItem> {
+public class CalendarEvent implements Comparable<CalendarEvent> {
     private final int id;
     private String title;
     private LocalDate date;
     
-    public ScheduleItem(int id, String title, LocalDate date) {
+    public CalendarEvent(int id, String title, LocalDate date) {
         this.id = id;
         this.title = title;
         this.date = date;
@@ -39,7 +39,7 @@ public class ScheduleItem implements Comparable<ScheduleItem> {
     }
     
     @Override
-    public int compareTo(ScheduleItem other) {
+    public int compareTo(CalendarEvent other) {
         int dateComparison = this.date.compareTo(other.date);
         if (dateComparison != 0) { return dateComparison; }
         return this.title.compareTo(other.title);
@@ -49,7 +49,7 @@ public class ScheduleItem implements Comparable<ScheduleItem> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ScheduleItem that = (ScheduleItem) o;
+        CalendarEvent that = (CalendarEvent) o;
         return id == that.id;
     }
     

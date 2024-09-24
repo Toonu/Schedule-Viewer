@@ -10,7 +10,7 @@ public class ScheduleViewer {
      * Main starting point.
      * @param args String[] args.
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         if (args.length < 1) {System.out.println("Usage: java ScheduleViewer <filename> -args\nArguments:\n-d | -delimiter ;"); return;}
         if (args.length % 2 == 0) {System.out.println("Invalid number of arguments"); return;}
         
@@ -34,7 +34,11 @@ public class ScheduleViewer {
         }
         
         //Arg 1 - Check file & content. Error handling.
-        FileLoader.loadFileByRow(file, new Calendar(new ArrayList<>()));
+        try {
+            FileLoader.loadFileByRow(file, new Calendar(new ArrayList<>()));
+        } catch (Exception e) {
+            System.out.println("Aborting operation: " + e.getMessage());
+        }
     }
     
     interface ArgumentHandler {

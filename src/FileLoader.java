@@ -71,9 +71,8 @@ public class FileLoader {
             iteration = Integer.parseInt(stringIteration);
             repetitivenessType = RepetitivenessType.fromString(stringType);
             
-            ScheduleTemplate template = new ScheduleTemplate(title, dateStart, dateEnd, iteration, repetitivenessType);
+            EventTemplate template = new EventTemplate(title, dateStart, dateEnd, iteration, repetitivenessType);
             template.exportSchedules(calendar);
-            //ToDo -args for cancelling loading on any error, instead of ignoring errors
         } catch (InvalidParameterException e) {
             String message = "Warning: Line " + Utils.rPad(String.valueOf(i), 4) + " is invalid due to wrongly formatted time. " + e.getMessage();
             if (ScheduleViewer.doesAbortOnExc) { //Abort args
