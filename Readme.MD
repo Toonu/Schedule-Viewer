@@ -3,13 +3,13 @@
 ## Compilation & Running
 
 ### Default
-1. Download pre-compiled package from [Packages](https://github.com/Toonu?tab=packages&repo_name=Schedule-Viewer).
+1. Download pre-compiled package from [Releases](https://github.com/Toonu/Schedule-Viewer/releases).
 ### Manual
 1. Download repository folder.
 2. While inside the ScheduleViewer src folder.
 3. Run `javac ScheduleViewer.java`
 ## Running
-- If you've chosen the Production.zip from [Packages](https://github.com/Toonu?tab=packages&repo_name=Schedule-Viewer).
+- If you've chosen the Production.zip from [Releases](https://github.com/Toonu/Schedule-Viewer/releases).
 1. Unzip & Navigate yourself into the Production folder.
 2. Insert your text file `filename.txt` into the ScheduleViewer folder.
 3. Run `java ScheduleViewer filename.txt` with optional arguments.
